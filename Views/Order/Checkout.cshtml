@@ -1,0 +1,103 @@
+﻿@model CheckoutViewModel
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="#">Home</a>
+                <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                <span class="breadcrumb-item active">Checkout</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+ <!-- Checkout Start -->
+ <form asp-action="Checkout" asp-controller="Order" method="post">
+     <div class="p-4 rounded border row">
+         <div asp-validation-summary="ModelOnly" class="bg-danger"></div>
+         <div class="col-6">
+             <div class="form-group" row>
+                 <div class="col-4">
+                     <label>Name</label>
+                 </div>
+                 <div class="col-8">
+                     <input type="hidden" asp-for="Order.Id" />
+                     <input class="form-control" type="text" asp-for="Order.Name">
+                 </div>
+                 <span asp-validation-for="Order.Name" class="text-danger"></span>
+             </div>
+             <div class="form-group" row>
+                  <div class="col-4">
+                     <label>Email</label>
+                 </div>
+                 <div class="col-8">
+                     <input class="form-control" type="text" asp-for="Order.Email">
+                 </div>
+                 <span asp-validation-for="Order.Email" class="text-danger"></span>
+             </div>
+             <div class="form-group" row>
+                <div class="col-4">
+                     <label>Mobile No</label>
+                 </div>
+                 <div class="col-8">
+                     <input class="form-control" type="text" asp-for="Order.PhoneNum">
+                 </div>
+                 <span asp-validation-for="Order.PhoneNum" class="text-danger"></span>
+             </div>
+             <div class="form-group" row>
+                    <div class="col-4">
+                     <label>Address</label>
+                    </div>
+                 <div class="col-8">
+                     <input class="form-control" type="text" asp-for="Order.Address">
+                 </div>
+                 <span asp-validation-for="Order.Address" class="text-danger"></span>
+             </div>
+             <div class="form-group" row>
+                    <div class="col-4">
+                     <label>OrderDate</label>
+                 </div>
+                 <div class="col-8">
+                     <input class="form-control" type="text" asp-for="Order.OrderDate">
+                 </div>
+                 <span asp-validation-for="Order.OrderDate" class="text-danger"></span>
+             </div>
+         </div>
+         <div class="col-6">
+             <table class="table table-border">
+                 <thead>
+                     <tr>
+                         <th>image</th>
+                         <th>Name</th>
+                         <th>Price</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     @foreach (var item in Model.ShoppingCarts)
+                     {
+                         <tr>
+                             <td><img src="~/product/@item.Product.Image" alt="" style="width: 50px;" /></td>
+                             <td>@item.Product.Name</td>
+                             <td>@item.Product.Price</td>
+                         </tr>
+                     }
+                 </tbody>
+             </table>
+         </div>
+         <div class="text-right">
+             <h5>Total</h5>
+             <h5>$</h5>
+         </div>
+         @Html.AntiForgeryToken()
+         <div class="form-group text-right">
+             <input class="btn btn-block btn-primary font-weight-bold py-3" type="submit" value="Place Order" />
+         </div>
+     </div>
+ </form>

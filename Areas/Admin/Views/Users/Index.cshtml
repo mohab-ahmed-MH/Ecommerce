@@ -1,0 +1,61 @@
+﻿@model List<AppUser>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+ <!-- Top Selling -->
+            <div class="col-12">
+              <div class="card top-selling overflow-auto">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  
+                </div>
+
+                <div class="card-body pb-0">
+                  <h5 class="card-title">Top Selling <span>| Today</span></h5>
+                  <a  asp-action="#" asp-controller="#" asp-area="Admin"
+                       class="btn btn-outline-success">Add User</a>
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                          <th scope="col">Name</th>
+                          <th scope="col">UserName</th>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       @foreach (var item in Model)
+                       {
+                            <tr>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.UserName
+                                </td>
+                                <td>
+                                    <a asp-action="Active" asp-controller="Users" asp-area="Admin" asp-route-id="@item.Id"
+                                       class="btn btn-outline-success">
+                                       Active
+                                    </a>
+                                    <a asp-action="Block" asp-controller="Users" asp-area="Admin" asp-route-id="@item.Id"
+                                       class="btn btn-outline-danger">
+                                       Block
+                                    </a>
+                                </td>
+                           </tr>
+                       }
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Top Selling -->
+
+
